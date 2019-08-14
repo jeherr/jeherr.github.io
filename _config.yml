@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "John E. Herr"
 title_separator          : "-"
 name                     : &name "John E. Herr"
-description              : &description "personal description"
+description              : &description "Academic website"
 url                      : https://jeherr.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "jeherr/jeherr.github.io"
@@ -187,6 +187,12 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
+  awards:
+    output: true
+    permalink: /:collection/:path/
+  education:
+    output: true
+    permalink: /:collection/:path/
 
 
 # Defaults
@@ -242,6 +248,22 @@ defaults:
       type: talks
     values:
       layout: talk
+      author_profile: true
+      share: true
+  # _awards
+  - scope:
+      path: ""
+      type: awards
+    values:
+      layout: single
+      author_profile: true
+      share: true
+  # _education
+  - scope:
+      path: ""
+      type: education
+    values:
+      layout: single
       author_profile: true
       share: true
 
