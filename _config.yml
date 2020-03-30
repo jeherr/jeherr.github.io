@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Dr. John E. Herr"
+title                    : "John E. Herr"
 title_separator          : "-"
 name                     : &name "John E. Herr"
 description              : &description "Academic website"
