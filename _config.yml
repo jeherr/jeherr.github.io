@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "John E. Herr"
+title                    : "Dr. John E. Herr"
 title_separator          : "-"
 name                     : &name "John E. Herr"
 description              : &description "Academic website"
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "John E. Herr"
   avatar           : "profile.png"
-  bio              : "Theoretical chemistry @ Notre Dame"
+  bio              : "Machine learning and theoretical chemistry PhD @ Notre Dame"
   location         : "Notre Dame, IN"
   employer         :
   pubmed           :
