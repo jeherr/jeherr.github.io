@@ -26,14 +26,55 @@ The encoded representation from the autoencoder is not interpretable directly, b
 what information is encoded, we performed principal component analysis on the elemental modes vectors and plotted
 first and second principal components.
 
- ![](/files/pca_modes.png) 
+![](/files/pca_modes.png)
+ 
+The elements are grouped by color into common subsets which represent similarities among the group. 
+The trends of the principal components are strikingly similar to the periodic table, despite never having 
+been given the group or period number of each element during training of the autoencoder. Indeed the
+elemental modes contain information which may be used to describe similarities and differences among
+the elements.
+ 
 
 
 ## Geometric features
 
 
+The geometric features describe the local environment of an atom. In the example figure, the uracil molecule is
+shown with the local environment around the nitrogen atom in the center of the highlighted circle. The geometric
+features use a basis of two-body and three-body correlations to describe the distances and angles between atoms
+that fall within the sensory range of the basis.
+
+![](/files/acsfs.png)
+
+The geometric features used for TensorMol are called the atom-centered symmetry functions (ACSFs). The equations 
+to derive the features are given below. The equations use a basis of Gaussian function centers and angles to 
+probe the local environment of the atom at different distances and reference angles. The first two equations 
+are called the radial and angular functions, respectively. The radial functions purely encode the distance of 
+an atom in the local environment. The angular functions encode the average distance of a pair of atoms, and 
+the angle between the atoms with the vertex at the central atom. The cutoff function is used with both sets 
+of the symmetry functions to ensure that the signal from the features smoothly drops to zero as an atom moves 
+beyond the sensory range. The results are summed over all neighbors in the local environment to keep the features
+invariant with respect to ordering of the neighbor atoms.
+
+![](/files/acsfs_eqns.png)
+
 ## Full feature vector
 
+The ACSFs only encode the geometric environment. The identity of atoms must also be encoded in the final feature
+vector used to represent the atom. The previous iteration of TensorMol used channels to differentiate the identity
+of atoms in the local environment. The radial functions contain channels for each unique element, but the angular
+functions must contain channels for each unique pair of elements (i.e. HH, HC, HN, HO, CC, etc.) which scales
+the number of input features exponentially with the number of unique elements.
+
+![](/files/tmol1_features.png)
+
+In contrast to its predecessor, TensorMol 2.0 avoids scaling the size of the feature vectors by using the
+elemental modes to scale the geometric features across channels. The radial function uses the elemental mode
+vector of the atom, and the angular symmetry functions first take the element-wise product of the elemental
+mode vectors for the pair of atoms, which is then used to encoded the angular functions
+
+
+![](/files/tmol2_features.png)
 
 ## Energy and charge networks
 
