@@ -78,7 +78,46 @@ mode vectors for the pair of atoms, which is then used to encoded the angular fu
 
 ## Energy and charge networks
 
+The previous version of TensorMol uses an array of neural networks, one for each unique element in the training
+data. Additionally, there are two subsets of networks; one for predicting partial charges of each atom, and one
+for predicting a contribution to the total molecular energy. The partial charges are used to include a long-range
+Coulomb energy, which is added to the contributions predicted by the energy networks. Dispersion energy is also
+included using Grimme's semi-emiprical C6 scheme.
+
+![](/files/tmol1_enn.png){:height="55%" width="55%"}
+![](/files/tmol1_cnn.png){:height="43%" width="43%"}
+
+The updated TensorMol model instead uses a single neural network for all elements. The advantages are a reduced
+number of overall parameters, improvements to dataset imbalances with respect to the frequency of each element
+in the training data, and parameter sharing can incorporate transfer learning between the elements.
+
+![](/files/tmol2_networks.png){:height="50%" width="50%"}
+
+## Training dataset
+
+The training data includes ~1.35 million samples from a diverse set of small organic molecules including eleven 
+unique elements. To put this into perspective, the first iteration of TensorMol included four unique elements. 
+The total number of parameters used for TensorMol 1.0 was ~7.3 million. To train an equivalent model for eleven 
+elements would increase the number of parameters to ~63 million. The changes made in TensorMol 2.0 only required 
+~1.4 million parameters. Additionally, the energy and force errors on the test set after training the model was 
+0.098 kcal/mol/atom and 3.7 kcal/mol/Å, respectively. These errors are similar to the previous model, despite
+a more challenging training set and fewer overall parameters.
 
 ## Transfer learning through shared parameters
 
+To explore the degree to which the parameter sharing may improve predictions, we trained an identical model by
+removing all samples including any Cl atoms from the datasets. Then we examined how the two models differ in
+their predictions of the atomic energies. First, a comparison for the distribution of N atom energies is given
+to show that the distributions are expected to have minor differences, even for elements which have significant
+numbers of samples, but that the distributions are highly similar.
+
+![](/files/n_atomization.png)
+
+Comparing the distributions for Cl atoms from the independent test data between the two models, it can be seen
+that there is a larger discrepancy, however, qualitatively the distributions are highly similar. This is despite
+one of the models never having trained on this element. The error in the predicted total energy for these 
+molecules which all include at minimum one Cl atom, is about 10 kcal/mol. TensorMol 1.0 by contrast is unable 
+to make predictions for elements it has not trained on. 
+
+![](/files/cl_atomization.png)
 
