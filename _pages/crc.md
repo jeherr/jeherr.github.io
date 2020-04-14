@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: archive
 title: "TensorMol 2.0: A fully transferable high-dimensional neural network potential"
 permalink: /crc/
 author_profile: true

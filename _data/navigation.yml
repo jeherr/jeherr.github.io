@@ -3,11 +3,11 @@ main:
   - title: "Publications"
     url: /publications/
 
-  - title: "Talks"
+  - title: "Talks and Presentations"
     url: /talks/    
 
-  - title: "Posters"
-    url: /posters/
+  - title: "CRC"
+    url: /crc/
 
   #- title: "Teaching"
   #  url: /teaching/

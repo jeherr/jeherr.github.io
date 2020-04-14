@@ -2,10 +2,9 @@
 title: "Compressing physical properties of atomic species for improving predictive chemistry"
 collection: talks
 type: "Poster"
-permalink: /talks/05-23-2019-lehigh-poster
-venue: "Lehigh University, Institute for Data Intelligent Systems and Computation"
+permalink: /talks/05-24-2019-lehigh/
+venue: "Foundational & Applied Data Science for Molecular and Material Science & Engineering, Lehigh University"
 date: 2019-05-24
-location: "Bethlehem, PA"
+location: "Bethleham, PA"
 ---
 
-One of the most important aspects of good machine learning models is the representation of data in a form which is suitable for the algorithm. In the chemical sciences this often means representing atomic species by discrete representations such as atomic number, or by using one-hot channels for each unique atomic species, neither of which are ideal solutions. In this work we derive a continuous vector representation by compressing properties of each element with an auto-encoder, which captures underlying physical law and provides many advantages to several neural network models shown here.
